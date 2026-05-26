@@ -1,0 +1,52 @@
+let livros = [
+  { id: 1, titulo: 'Livro A', autor: 'Autor A', preco: 10.0 },
+  { id: 2, titulo: 'Livro B', autor: 'Autor B', preco: 20.0 }
+];
+
+function listarLivros() {
+  return livros;
+}
+
+function adicionarLivro(livro) {
+  const novoId = livros.length ? livros[livros.length - 1].id + 1 : 1;
+
+  // Tratamento seguro para converter string com vírgula ou ponto em número float
+  const precoFormatado = parseFloat(String(livro.preco).replace(',', '.'));
+
+  const novoLivro = {
+    id: novoId,
+    titulo: livro.titulo,
+    autor: livro.autor,
+    preco: isNaN(precoFormatado) ? 0.0 : precoFormatado
+  };
+
+  livros.push(novoLivro);
+}
+
+function buscarLivroPorId(id) {
+  return livros.find(l => l.id === parseInt(id));
+}
+
+function atualizarLivro(id, dados) {
+  const index = livros.findIndex(l => l.id === parseInt(id));
+
+  if (index !== -1) {
+    const precoFormatado = parseFloat(String(dados.preco).replace(',', '.'));
+
+    livros[index].titulo = dados.titulo;
+    livros[index].autor = dados.autor;
+    livros[index].preco = isNaN(precoFormatado) ? 0.0 : precoFormatado;
+  }
+}
+
+function deletarLivro(id) {
+  livros = livros.filter(l => l.id !== parseInt(id));
+}
+
+module.exports = {
+  listarLivros,
+  adicionarLivro,
+  buscarLivroPorId,
+  atualizarLivro,
+  deletarLivro
+};
