@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro de Livros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: white;
+      background-color: #4c005e;
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #4c005e;
+      width: 300px;
+      margin-top: 30px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #4c005e;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      background-color: #0f0137;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    ul {
+      margin-top: 20px;
+      width: 320px;
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    a {
+      color: #4c005e;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cadastro de Livros</h1>
+    <div class="card">
+    <form action="/cadastrar" method="POST">
+
+      <label>Título do Livro</label>
+      <input type="text" name="titulo" required />
+
+      <label>Autor</label>
+      <input type="text" name="autor" required />
+
+      <label>Preço</label>
+      <input type="text" name="preco" required />
+
+      <button type="submit">Cadastrar Livro</button>
+    </form>
+  </div>
+
+  <% if (livros.length > 0) { %>
+    <ul>
+      <% livros.forEach(l => { %>
+        <li>
+          <span>
+            <strong><%= l.titulo %></strong> — <em><%= l.autor %></em>   
+            <br>
+            Preço: R$ <%= l.preco.toFixed(2) %>
+          </span>
+          <span>
+            <a href="/editar/<%= l.id %>">Editar</a> |
+            <a href="/deletar/<%= l.id %>">Excluir</a>
+          </span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+  </div>
+</body>
+</html>
