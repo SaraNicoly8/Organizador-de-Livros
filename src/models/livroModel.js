@@ -62,7 +62,14 @@ class Livro {
 }
 
 
-let livros = []
+let livros = [new Livro {
+   'titulo': 'Dom Casmurro',
+   'autor': 'Machado de Assis',
+   'genero': 'Romance',
+   'anoPublicacao': '1899',
+   'sinopse': ' o narrador Bento Santiago retoma a infância que passou na Rua de Matacavalos e conta a história do amor e das desventuras que viveu com Capitu, uma das personagens mais enigmáticas e intrigantes da literatura brasileira.'
+ }
+]
 
 function listarLivros() {
   return livros;
