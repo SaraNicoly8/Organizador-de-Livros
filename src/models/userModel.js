@@ -36,10 +36,16 @@ class Usuario {
     }
 }
 
-let usuarios = []
+let usuarios = [
+   new Usuario {
+      'email': 'saraoliveira@email.com',
+      'nome': 'Sarah Oliveira',
+      'senha' : 'sarahosaraho'
+   }
+]
 
 function cadastrarUsuario(Usuario) {
-  const novoId = livros.length ? livros[livros.length - 1].id + 1 : 1;
+  const novoId = usuarios.length ? usuarios[usuarios.length - 1].id + 1 : 1;
 
   const novoUsuario = {
     email: Usuario.email,
