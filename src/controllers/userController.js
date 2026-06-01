@@ -1,45 +1,38 @@
 const usuarioModel = require('../models/usuarioModel');
 
 function listar(req, res) {
-  const livros = livroModel.listarLivros();
-  res.render('index', { livros });
+  const usuarios = usuarioModel.listarUsuarios();
+  res.render('index', { usuarios });
 }
 
 function cadastrar(req, res) {
-  const { titulo, autor, preco } = req.body;
+  const { nome, email, senha } = req.body;
 
-  if (!titulo || !autor || !preco) {
+  if (!email || !nome || !senha) {
     return res.send('Preencha todos os campos!');
   }
 
-  livroModel.adicionarLivro({ titulo, autor, preco });
+  usuarioModel.adicionarUsuario({ email, nome, senha });
 
   res.redirect('/');
 }
 
-function editarForm(req, res) {
-  const livro = livroModel.buscarLivroPorId(req.params.id);
-
-  if (!livro) return res.send('Livro não encontrado!');
-
-  res.render('editar', { livro });
-}
 
 function atualizar(req, res) {
-  const { titulo, autor, preco } = req.body;
+  const { email, nome, senha } = req.body;
 
-  if (!titulo || !autor || !preco) {
+  if (!email || !nome || !senha) {
     return res.send('Preencha todos os campos!');
   }
 
-  livroModel.atualizarLivro(req.params.id, { titulo, autor, preco });
+  usuarioModel.atualizarUsuario(req.params.id, { email , nome, senha });
 
   res.redirect('/');
 }
 
 function deletar(req, res) {
-  livroModel.deletarLivro(req.params.id);
+  usuarioModel.deletarUsuario(req.params.id);
   res.redirect('/');
 }
 //Jesus te ama!
-module.exports = { listar, cadastrar, editarForm, atualizar, deletar };
+module.exports = { listar, cadastrar, atualizar, deletar };
