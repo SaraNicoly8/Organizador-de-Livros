@@ -1,0 +1,45 @@
+const usuarioModel = require('../models/usuarioModel');
+
+function listar(req, res) {
+  const livros = livroModel.listarLivros();
+  res.render('index', { livros });
+}
+
+function cadastrar(req, res) {
+  const { titulo, autor, preco } = req.body;
+
+  if (!titulo || !autor || !preco) {
+    return res.send('Preencha todos os campos!');
+  }
+
+  livroModel.adicionarLivro({ titulo, autor, preco });
+
+  res.redirect('/');
+}
+
+function editarForm(req, res) {
+  const livro = livroModel.buscarLivroPorId(req.params.id);
+
+  if (!livro) return res.send('Livro não encontrado!');
+
+  res.render('editar', { livro });
+}
+
+function atualizar(req, res) {
+  const { titulo, autor, preco } = req.body;
+
+  if (!titulo || !autor || !preco) {
+    return res.send('Preencha todos os campos!');
+  }
+
+  livroModel.atualizarLivro(req.params.id, { titulo, autor, preco });
+
+  res.redirect('/');
+}
+
+function deletar(req, res) {
+  livroModel.deletarLivro(req.params.id);
+  res.redirect('/');
+}
+//Jesus te ama!
+module.exports = { listar, cadastrar, editarForm, atualizar, deletar };
