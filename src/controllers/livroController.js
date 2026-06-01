@@ -6,13 +6,13 @@ function listar(req, res) {
 }
 
 function cadastrar(req, res) {
-  const { titulo, autor, preco } = req.body;
+  const { titulo, autor, sinopse, anoPublicacao, genero } = req.body;
 
-  if (!titulo || !autor || !preco) {
+  if (!titulo || !autor || !anoPublicacao || !genero || !sinopse) {
     return res.send('Preencha todos os campos!');
   }
 
-  livroModel.adicionarLivro({ titulo, autor, preco });
+  livroModel.adicionarLivro({ titulo, autor, anoPublicacao, genero, sinopse });
 
   res.redirect('/');
 }
@@ -26,13 +26,13 @@ function editarForm(req, res) {
 }
 
 function atualizar(req, res) {
-  const { titulo, autor, preco } = req.body;
+  const { titulo, autor, genero, anoPublicacao, sinopse } = req.body;
 
-  if (!titulo || !autor || !preco) {
+  if (!titulo || !autor || !genero, !anoPublicacao, !sinopse) {
     return res.send('Preencha todos os campos!');
   }
 
-  livroModel.atualizarLivro(req.params.id, { titulo, autor, preco });
+  livroModel.atualizarLivro(req.params.id, { titulo, autor, genero, sinopse, anoPublicacao });
 
   res.redirect('/');
 }
