@@ -12,7 +12,6 @@ function cadastrar(req, res) {
     return res.send('Preencha todos os campos!');
   }
 
-  // Passando o objeto completo para o Model
   livroModel.adicionarLivro({ titulo, autor, preco });
 
   res.redirect('/');
@@ -42,5 +41,5 @@ function deletar(req, res) {
   livroModel.deletarLivro(req.params.id);
   res.redirect('/');
 }
-
+//Jesus te ama!
 module.exports = { listar, cadastrar, editarForm, atualizar, deletar };
