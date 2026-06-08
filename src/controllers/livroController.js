@@ -1,22 +1,44 @@
-const livroModel = require('../models/livroModel');
+import livroRepository from "../repositories/LivroRepository.js";
 
-function listar(req, res) {
-  const livros = livroModel.listarLivros();
-  res.render('index', { livros });
+async function listar(req,res){
+
+    const livros =
+        await livroRepository.listar();
+
+    res.render("index",{livros});
+
 }
+async function cadastrar(req,res){
 
-function cadastrar(req, res) {
-  const { titulo, autor, sinopse, anoPublicacao, genero } = req.body;
+    try{
 
-  if (!titulo || !autor || !anoPublicacao || !genero || !sinopse) {
-    return res.send('Preencha todos os campos!');
-  }
+        const {
+            titulo,
+            autor,
+            genero,
+            anoPublicacao,
+            sinopse
+        } = req.body;
 
-  livroModel.adicionarLivro({ titulo, autor, anoPublicacao, genero, sinopse });
+        if(!titulo){
+            throw new Error(
+                "Título obrigatório"
+            );
+        }
 
-  res.redirect('/');
+        await livroRepository.cadastrar(
+            req.body
+        );
+
+        res.redirect("/");
+
+    }catch(error){
+
+        res.send(error.message);
+
+    }
+
 }
-
 function editarForm(req, res) {
   const livro = livroModel.buscarLivroPorId(req.params.id);
 
